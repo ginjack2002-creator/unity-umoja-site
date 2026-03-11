@@ -387,114 +387,129 @@ gsap.registerPlugin(ScrollTrigger, ScrollToPlugin);
 const panels = document.querySelectorAll('.panel');
 const allDots = document.querySelectorAll('.p-dot');
 
-// Section scroll ranges
-const sectionRanges = [
-  [0,    0.15],  // 0: Hero
-  [0.15, 0.30],  // 1: About
-  [0.30, 0.45],  // 2: Journey
-  [0.45, 0.60],  // 3: Leadership
-  [0.60, 0.75],  // 4: Events
-  [0.75, 0.90],  // 5: Gallery
-  [0.90, 1.00],  // 6: Connect
-];
+// Each section's center in scroll progress (0-1)
+const sectionCenters = [0.07, 0.22, 0.37, 0.52, 0.67, 0.82, 0.95];
+// Thresholds for switching sections
+const sectionThresholds = [0, 0.15, 0.30, 0.45, 0.60, 0.75, 0.90, 1.01];
 
-// Master scroll trigger — drives everything
-ScrollTrigger.create({
-  trigger: '#scroll-container',
-  start: 'top top',
-  end: 'bottom bottom',
-  scrub: 0.5,
-  onUpdate: (self) => {
-    scrollProgress = self.progress;
-    updateActiveSection(scrollProgress);
-    updateCamera(scrollProgress);
-    update3DElements(scrollProgress);
-  },
-});
+// Track target scroll progress (smoothed)
+let targetScrollProgress = 0;
 
-function updateActiveSection(progress) {
-  let newSection = 0;
-  for (let i = 0; i < sectionRanges.length; i++) {
-    const [start, end] = sectionRanges[i];
-    if (progress >= start && progress < end) {
-      newSection = i;
-      break;
-    }
+// Read raw scroll position every frame via scroll event
+function readScrollProgress() {
+  const container = document.getElementById('scroll-container');
+  const maxScroll = container.offsetHeight - window.innerHeight;
+  if (maxScroll <= 0) return 0;
+  return Math.max(0, Math.min(1, window.scrollY / maxScroll));
+}
+
+// Panel opacity states — managed directly, no competing tweens
+const panelStates = new Array(SECTION_COUNT).fill(0);
+panelStates[0] = 1; // Hero starts visible
+
+function getSectionFromProgress(progress) {
+  for (let i = sectionThresholds.length - 2; i >= 0; i--) {
+    if (progress >= sectionThresholds[i]) return i;
   }
-  // Edge: last section
-  if (progress >= sectionRanges[6][0]) newSection = 6;
+  return 0;
+}
 
-  if (newSection !== activeSection) {
-    transitionSection(activeSection, newSection);
-    activeSection = newSection;
+// Compute panel opacity based on scroll progress
+// Each panel fades in as we approach its range and fades out as we leave
+function computePanelOpacity(sectionIdx, progress) {
+  const start = sectionThresholds[sectionIdx];
+  const end = sectionThresholds[sectionIdx + 1];
+  const fadeZone = 0.04; // 4% of total scroll for fade transitions
+
+  if (progress < start - fadeZone || progress > end + fadeZone) return 0;
+
+  // Fade in zone
+  if (progress < start + fadeZone) {
+    return Math.max(0, Math.min(1, (progress - start + fadeZone) / (fadeZone * 2)));
+  }
+  // Fade out zone
+  if (progress > end - fadeZone) {
+    return Math.max(0, Math.min(1, (end + fadeZone - progress) / (fadeZone * 2)));
+  }
+  // Fully visible
+  return 1;
+}
+
+// Apply panel visibility each frame
+function updatePanels(progress) {
+  const currentSection = getSectionFromProgress(progress);
+
+  panels.forEach((panel, i) => {
+    const targetOpacity = computePanelOpacity(i, progress);
+
+    // Smooth interpolation for silky transitions
+    panelStates[i] += (targetOpacity - panelStates[i]) * 0.15;
+
+    // Snap near-zero / near-one for clean hide/show
+    if (panelStates[i] < 0.01) panelStates[i] = 0;
+    if (panelStates[i] > 0.99) panelStates[i] = 1;
+
+    panel.style.opacity = panelStates[i];
+
+    if (panelStates[i] > 0) {
+      panel.style.visibility = 'visible';
+      panel.style.pointerEvents = panelStates[i] > 0.5 ? 'auto' : 'none';
+      panel.classList.add('active');
+    } else {
+      panel.style.visibility = 'hidden';
+      panel.style.pointerEvents = 'none';
+      panel.classList.remove('active');
+      // Reset reveal animations for re-entry
+      panel.querySelectorAll('.reveal-up, .reveal-left, .reveal-scale').forEach(el => {
+        el.classList.remove('visible');
+      });
+    }
+  });
+
+  // Update active section tracking
+  if (currentSection !== activeSection) {
+    activeSection = currentSection;
   }
 
   // Update progress dots
-  allDots.forEach((d, i) => d.classList.toggle('on', i === newSection));
+  allDots.forEach((d, i) => d.classList.toggle('on', i === currentSection));
 
-  // Reveal children in active panel
-  const activePanel = panels[newSection];
-  if (activePanel) {
-    activePanel.querySelectorAll('.reveal-up, .reveal-left, .reveal-scale').forEach((el, i) => {
-      setTimeout(() => el.classList.add('visible'), i * 100);
+  // Trigger reveal animations for active panel
+  const activePanel = panels[currentSection];
+  if (activePanel && panelStates[currentSection] > 0.5) {
+    activePanel.querySelectorAll('.reveal-up:not(.visible), .reveal-left:not(.visible), .reveal-scale:not(.visible)').forEach((el, i) => {
+      setTimeout(() => el.classList.add('visible'), i * 80);
     });
   }
 }
 
-function transitionSection(fromIdx, toIdx) {
-  const fromPanel = panels[fromIdx];
-  const toPanel = panels[toIdx];
-
-  if (fromPanel) {
-    gsap.to(fromPanel, {
-      opacity: 0,
-      duration: 0.5,
-      ease: 'power2.in',
-      onComplete: () => {
-        fromPanel.classList.remove('active');
-        fromPanel.style.visibility = 'hidden';
-        // Reset reveals for re-entry
-        fromPanel.querySelectorAll('.reveal-up, .reveal-left, .reveal-scale').forEach(el => {
-          el.classList.remove('visible');
-        });
-      },
-    });
-  }
-
-  if (toPanel) {
-    toPanel.style.visibility = 'visible';
-    toPanel.classList.add('active');
-    gsap.fromTo(toPanel,
-      { opacity: 0 },
-      { opacity: 1, duration: 0.6, ease: 'power2.out', delay: 0.1 }
-    );
-  }
-}
-
-// Initialize: show hero panel
-panels[0].classList.add('active');
+// Initialize: hero panel visible
 panels[0].style.visibility = 'visible';
 panels[0].style.opacity = '1';
+panels[0].classList.add('active');
 
 // ============================================
-// CAMERA UPDATE (spline position)
+// CAMERA UPDATE (runs every frame in animate loop)
 // ============================================
-const cameraPos = new THREE.Vector3();
-const lookAtPos = new THREE.Vector3();
-const cameraOffset = new THREE.Vector3();
+const cameraTargetPos = new THREE.Vector3();
+const cameraTargetLookAt = new THREE.Vector3();
+const currentLookAt = new THREE.Vector3(0, 0, 5);
 
-function updateCamera(progress) {
-  const t = Math.max(0, Math.min(1, progress));
-  cameraSpline.getPointAt(t, cameraPos);
-  lookAtSpline.getPointAt(t, lookAtPos);
+function updateCamera() {
+  const t = Math.max(0, Math.min(0.9999, scrollProgress));
+  cameraSpline.getPointAt(t, cameraTargetPos);
+  lookAtSpline.getPointAt(t, cameraTargetLookAt);
 
-  // Mouse parallax offset
-  cameraOffset.set(mouse.x * 1.5, mouse.y * 1.0, 0);
-  cameraPos.add(cameraOffset);
+  // Add mouse parallax offset
+  cameraTargetPos.x += mouse.x * 1.5;
+  cameraTargetPos.y += mouse.y * 1.0;
+  cameraTargetLookAt.x += mouse.x * 0.5;
+  cameraTargetLookAt.y += mouse.y * 0.3;
 
-  camera.position.lerp(cameraPos, 0.1);
-  lookAtPos.add(new THREE.Vector3(mouse.x * 0.5, mouse.y * 0.3, 0));
-  camera.lookAt(lookAtPos);
+  // Smooth lerp every frame for silky camera movement
+  camera.position.lerp(cameraTargetPos, 0.06);
+  currentLookAt.lerp(cameraTargetLookAt, 0.06);
+  camera.lookAt(currentLookAt);
 }
 
 // ============================================
@@ -546,7 +561,20 @@ function animate() {
   requestAnimationFrame(animate);
   const elapsed = clock.getElapsedTime();
 
-  // Smooth mouse
+  // ---- Read scroll position every frame ----
+  targetScrollProgress = readScrollProgress();
+  scrollProgress += (targetScrollProgress - scrollProgress) * 0.08;
+
+  // ---- Update panels based on smooth scroll progress ----
+  updatePanels(scrollProgress);
+
+  // ---- Update camera along spline ----
+  updateCamera();
+
+  // ---- Update section-specific 3D elements ----
+  update3DElements(scrollProgress);
+
+  // ---- Smooth mouse ----
   mouse.x += (mouse.tx - mouse.x) * 0.05;
   mouse.y += (mouse.ty - mouse.y) * 0.05;
 
@@ -652,11 +680,9 @@ window.addEventListener('load', () => {
 
 // ---- Nav solid on scroll ----
 const nav = document.getElementById('nav');
-ScrollTrigger.create({
-  trigger: '#scroll-container',
-  start: '60px top',
-  onToggle: ({ isActive }) => nav.classList.toggle('solid', isActive),
-});
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('solid', window.scrollY > 60);
+}, { passive: true });
 
 // ---- Mobile menu ----
 const burger = document.getElementById('navBurger');
@@ -696,8 +722,9 @@ allDots.forEach((dot) => {
 
 function scrollToSection(idx) {
   if (idx < 0 || idx >= SECTION_COUNT) return;
-  const [start] = sectionRanges[idx];
-  const scrollTarget = start * (document.getElementById('scroll-container').offsetHeight - window.innerHeight);
+  const start = sectionThresholds[idx];
+  const maxScroll = document.getElementById('scroll-container').offsetHeight - window.innerHeight;
+  const scrollTarget = start * maxScroll;
   gsap.to(window, {
     scrollTo: { y: scrollTarget, autoKill: false },
     duration: 1.2,
