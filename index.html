@@ -3,229 +3,155 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>UNITY — Celebrating X Years | Women Leaders Thriving Together</title>
-  <meta name="description" content="Unity Professional Women's Network — A Decade of Leading. A Legacy of Lifting. 10 years of empowering African American women educators.">
+  <title>UNITY — Women Leaders Thriving Together</title>
+  <meta name="description" content="Unity Professional Women's Network — A Decade of Leading. A Legacy of Lifting.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
-
-  <script type="importmap">
-  {
-    "imports": {
-      "three": "https://unpkg.com/three@0.162.0/build/three.module.js",
-      "three/addons/": "https://unpkg.com/three@0.162.0/examples/jsm/"
-    }
-  }
-  </script>
-
-  <!-- GSAP + ScrollTrigger + ScrollToPlugin -->
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 </head>
 <body>
 
-  <!-- THREE.JS Canvas — subtle background -->
-  <canvas id="three-canvas"></canvas>
-
-  <!-- Preloader -->
-  <div class="preloader" id="preloader">
-    <div class="preloader-rings">
-      <div class="preloader-ring ring-1"></div>
-      <div class="preloader-ring ring-2"></div>
-      <div class="preloader-ring ring-3"></div>
+  <!-- ===== STAGE 1: THE GODDESS ===== -->
+  <section class="stage" id="stage">
+    <div class="goddess-wrap" id="goddessWrap">
+      <img src="assets/hero/goddess.gif" alt="Unity" class="goddess" id="goddess">
+      <div class="click-hint" id="clickHint">Click to enter</div>
     </div>
-    <div class="preloader-text-wrap">
-      <div class="preloader-title">Celebrating</div>
-      <div class="preloader-numeral">X</div>
-      <div class="preloader-subtitle">Years of Power</div>
+  </section>
+
+  <!-- ===== STAGE 2: THE REVEAL — Logo + Nav Words ===== -->
+  <section class="reveal" id="reveal">
+    <div class="reveal-inner">
+      <img src="assets/hero/unity-logo-oval.png" alt="Unity" class="reveal-logo" id="revealLogo">
+      <div class="reveal-tagline" id="revealTagline">A Decade of Leading. A Legacy of Lifting.</div>
+      <nav class="word-nav" id="wordNav">
+        <a href="#vision" class="word" data-delay="0">Vision</a>
+        <a href="#journey" class="word" data-delay="1">Journey</a>
+        <a href="#leadership" class="word" data-delay="2">Leadership</a>
+        <a href="#community" class="word" data-delay="3">Community</a>
+        <a href="#gallery" class="word" data-delay="4">Gallery</a>
+        <a href="#connect" class="word" data-delay="5">Connect</a>
+      </nav>
     </div>
-  </div>
+  </section>
 
-  <!-- Navigation -->
-  <nav class="nav" id="nav">
-    <a href="#" class="nav-logo" data-goto="0">
-      <img src="assets/hero/unity-logo.png" alt="Unity">
-    </a>
-    <div class="nav-links" id="navLinks">
-      <a href="#" data-goto="1">About</a>
-      <a href="#" data-goto="2">Journey</a>
-      <a href="#" data-goto="3">Board</a>
-      <a href="#" data-goto="4">Events</a>
-      <a href="#" data-goto="5">Gallery</a>
-      <a href="#" class="nav-cta" data-goto="6">Connect</a>
+  <!-- ===== CONTENT PAGES ===== -->
+  <main class="content" id="content">
+
+    <!-- Fixed top nav (appears after reveal) -->
+    <nav class="top-nav" id="topNav">
+      <a href="#stage" class="top-nav-logo">
+        <img src="assets/hero/unity-logo.png" alt="Unity">
+      </a>
+      <div class="top-nav-links">
+        <a href="#vision">Vision</a>
+        <a href="#journey">Journey</a>
+        <a href="#leadership">Leadership</a>
+        <a href="#community">Community</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#connect">Connect</a>
+      </div>
+      <button class="top-nav-burger" id="burger" aria-label="Menu">
+        <span></span><span></span><span></span>
+      </button>
+    </nav>
+
+    <!-- Mobile menu -->
+    <div class="mobile-menu" id="mobileMenu">
+      <a href="#vision">Vision</a>
+      <a href="#journey">Journey</a>
+      <a href="#leadership">Leadership</a>
+      <a href="#community">Community</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#connect">Connect</a>
     </div>
-    <button class="nav-burger" id="navBurger" aria-label="Menu">
-      <span></span><span></span><span></span>
-    </button>
-  </nav>
 
-  <!-- Section Progress Dots -->
-  <div class="progress-dots" id="progressDots">
-    <button class="p-dot on" data-idx="0"></button>
-    <button class="p-dot" data-idx="1"></button>
-    <button class="p-dot" data-idx="2"></button>
-    <button class="p-dot" data-idx="3"></button>
-    <button class="p-dot" data-idx="4"></button>
-    <button class="p-dot" data-idx="5"></button>
-    <button class="p-dot" data-idx="6"></button>
-  </div>
-
-  <!-- Mobile Menu -->
-  <div class="mob-menu" id="mobMenu">
-    <a href="#" data-goto="1">About</a>
-    <a href="#" data-goto="2">Journey</a>
-    <a href="#" data-goto="3">Board</a>
-    <a href="#" data-goto="4">Events</a>
-    <a href="#" data-goto="5">Gallery</a>
-    <a href="#" data-goto="6">Connect</a>
-  </div>
-
-  <!-- ===== SCROLL CONTAINER ===== -->
-  <div id="scroll-container">
-
-    <!-- ===== SECTION 0: HERO ===== -->
-    <div class="panel" id="panel-0" data-section="0">
-      <div class="panel-inner panel-hero">
-        <div class="hero-logo-wrap">
-          <img src="assets/hero/unity-logo-oval.png" alt="Unity" class="hero-oval">
+    <!-- VISION -->
+    <section class="page" id="vision">
+      <div class="page-inner">
+        <div class="page-label">Our Mission</div>
+        <h2 class="page-title fade-in">
+          To <span class="rose">empower</span> African American women educators
+          through <span class="gold">motivation</span>, awareness,
+          and <span class="rose">mentoring</span>.
+        </h2>
+        <div class="vision-grid">
+          <div class="vision-meaning fade-in">
+            <div class="meaning-word">Umoja</div>
+            <div class="meaning-def">means <em>Unity</em> in Swahili</div>
+          </div>
+          <div class="vision-text fade-in">
+            <p>To create a community of educational leaders dedicated to increasing the number of highly effective African American female administrators and superintendents.</p>
+            <p class="italic-rose">Expanding statewide — then nationwide.</p>
+          </div>
         </div>
-        <div class="hero-tagline">A Decade of Leading. A Legacy of Lifting.</div>
-        <div class="hero-bottom">
-          <div class="hero-celebrating">Celebrating</div>
-          <div class="hero-x">X</div>
-          <div class="hero-years">Years of Power</div>
-        </div>
-        <div class="scroll-indicator">
-          <div class="scroll-mouse"><div class="scroll-dot"></div></div>
-          <span>Scroll to Explore</span>
+        <div class="stats-row fade-in">
+          <div class="stat"><span class="stat-num" data-count="10">0</span><span class="stat-label">Years</span></div>
+          <div class="stat"><span class="stat-num" data-count="9">0</span><span class="stat-label">Leaders</span></div>
+          <div class="stat"><span class="stat-num">&infin;</span><span class="stat-label">Impact</span></div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- ===== SECTION 1: ABOUT ===== -->
-    <div class="panel" id="panel-1" data-section="1">
-      <div class="panel-inner panel-light">
-        <div class="sec-label reveal-up">Our Mission</div>
-        <div class="about-grid">
-          <div class="about-col-left">
-            <h2 class="about-mission reveal-up">
-              To <span class="hl-rose">empower</span> African American women educators
-              through <span class="hl-gold">motivation</span>, awareness,
-              and <span class="hl-rose">mentoring</span>.
-            </h2>
-            <div class="about-meaning reveal-up">
-              <div class="meaning-word">Umoja</div>
-              <div class="meaning-def">means <em>Unity</em> in Swahili</div>
-            </div>
+    <!-- JOURNEY -->
+    <section class="page page-alt" id="journey">
+      <div class="page-inner">
+        <div class="page-label">Our Story</div>
+        <h2 class="page-heading fade-in">The Journey</h2>
+        <div class="timeline">
+          <div class="tl-item fade-in" data-year="2016">
+            <h3>The Spark</h3>
+            <p>Dr. Lockhart &amp; Dr. Brent-Sanco plant the seed for African American women educators to rise together.</p>
           </div>
-          <div class="about-col-right">
-            <div class="about-vision reveal-up">
-              <h3>Our Vision</h3>
-              <p>To create a community of educational leaders dedicated to increasing the number of highly effective African American female administrators and superintendents.</p>
-              <p class="vision-italic">Expanding statewide — then nationwide.</p>
-            </div>
-            <div class="about-stats reveal-up">
-              <div class="stat-block"><div class="stat-val" data-count="10">0</div><div class="stat-lbl">Years</div></div>
-              <div class="stat-block"><div class="stat-val" data-count="9">0</div><div class="stat-lbl">Leaders</div></div>
-              <div class="stat-block"><div class="stat-val">&infin;</div><div class="stat-lbl">Impact</div></div>
-            </div>
+          <div class="tl-item fade-in" data-year="2017">
+            <h3>First Gathering</h3>
+            <p>The inaugural Sisters Speak — real conversation, no pretense, just truth and support.</p>
           </div>
-        </div>
-        <div class="marquee-strip">
-          <div class="marquee-inner">
-            <span>Motivate &bull; Mentor &bull; Elevate &bull; Lead &bull; Unite &bull; Empower &bull; Rise &bull; Transform &bull;&nbsp;</span>
-            <span>Motivate &bull; Mentor &bull; Elevate &bull; Lead &bull; Unite &bull; Empower &bull; Rise &bull; Transform &bull;&nbsp;</span>
+          <div class="tl-item fade-in" data-year="2019">
+            <h3>Growing Roots</h3>
+            <p>Board expands. Mentorship launches. Aspiring superintendents find their compass.</p>
           </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- ===== SECTION 2: JOURNEY ===== -->
-    <div class="panel" id="panel-2" data-section="2">
-      <div class="panel-inner panel-white">
-        <div class="sec-label reveal-up">Our Story</div>
-        <h2 class="sec-title reveal-up">The <em>Journey</em></h2>
-        <div class="journey-timeline" id="journeyTimeline">
-          <div class="tl-track">
-            <div class="tl-line"></div>
-            <div class="tl-node reveal-up" data-year="2016">
-              <div class="tl-marker"></div>
-              <div class="tl-content">
-                <h3>The Spark</h3>
-                <p>Dr. Lockhart &amp; Dr. Brent-Sanco plant the seed for African American women educators to rise together.</p>
-              </div>
-            </div>
-            <div class="tl-node reveal-up" data-year="2017">
-              <div class="tl-marker"></div>
-              <div class="tl-content">
-                <h3>First Gathering</h3>
-                <p>The inaugural Sisters Speak — real conversation, no pretense, just truth and support.</p>
-              </div>
-            </div>
-            <div class="tl-node reveal-up" data-year="2019">
-              <div class="tl-marker"></div>
-              <div class="tl-content">
-                <h3>Growing Roots</h3>
-                <p>Board expands. Mentorship launches. Aspiring superintendents find their compass.</p>
-              </div>
-            </div>
-            <div class="tl-node reveal-up" data-year="2020">
-              <div class="tl-marker"></div>
-              <div class="tl-content">
-                <h3>Resilience</h3>
-                <p>Unity goes virtual through a pandemic — sisterhood needs no building.</p>
-              </div>
-            </div>
-            <div class="tl-node reveal-up" data-year="2022">
-              <div class="tl-marker"></div>
-              <div class="tl-content">
-                <h3>National Vision</h3>
-                <p>CAAASA partnerships strengthen. The vision: statewide, then nationwide.</p>
-              </div>
-            </div>
-            <div class="tl-node reveal-up" data-year="2024">
-              <div class="tl-marker"></div>
-              <div class="tl-content">
-                <h3>Retreat Era</h3>
-                <p>Women's Retreat debuts — rest, strategy, and sisterhood in San Diego.</p>
-              </div>
-            </div>
-            <div class="tl-node active reveal-up" data-year="2026">
-              <div class="tl-marker"></div>
-              <div class="tl-content">
-                <h3>A Decade of Power</h3>
-                <p>Ten years. Countless leaders raised. The next chapter is bolder.</p>
-              </div>
-            </div>
+          <div class="tl-item fade-in" data-year="2020">
+            <h3>Resilience</h3>
+            <p>Unity goes virtual through a pandemic — sisterhood needs no building.</p>
+          </div>
+          <div class="tl-item fade-in" data-year="2022">
+            <h3>National Vision</h3>
+            <p>CAAASA partnerships strengthen. The vision: statewide, then nationwide.</p>
+          </div>
+          <div class="tl-item fade-in" data-year="2024">
+            <h3>Retreat Era</h3>
+            <p>Women's Retreat debuts — rest, strategy, and sisterhood in San Diego.</p>
+          </div>
+          <div class="tl-item fade-in active" data-year="2026">
+            <h3>A Decade of Power</h3>
+            <p>Ten years. Countless leaders raised. The next chapter is bolder.</p>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- ===== SECTION 3: LEADERSHIP ===== -->
-    <div class="panel" id="panel-3" data-section="3">
-      <div class="panel-inner panel-light">
-        <div class="sec-label reveal-up">Leadership</div>
-        <div class="quote-block reveal-up">
-          <span class="q-mark">&ldquo;</span>Someone who's already walked the path, <span class="hl-rose">guide you along</span> to yours.
-        </div>
-        <div class="founders-strip">
-          <div class="founder-card reveal-up">
-            <div class="f-photo">
+    <!-- LEADERSHIP -->
+    <section class="page" id="leadership">
+      <div class="page-inner">
+        <div class="page-label">Leadership</div>
+        <div class="quote fade-in">&ldquo;Someone who's already walked the path, guide you along to yours.&rdquo;</div>
+        <div class="founders fade-in">
+          <div class="founder">
+            <div class="founder-photo">
               <img src="assets/board/leslie-lockhart.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="f-init">LL</div>
+              <div class="founder-init">LL</div>
             </div>
             <div>
               <h3>Dr. Leslie Lockhart</h3>
               <p>Former Superintendent &middot; VP Hilton Foundation</p>
             </div>
           </div>
-          <div class="founder-card reveal-up">
-            <div class="f-photo">
+          <div class="founder">
+            <div class="founder-photo">
               <img src="assets/board/patricia-brent-sanco.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
-              <div class="f-init">PB</div>
+              <div class="founder-init">PB</div>
             </div>
             <div>
               <h3>Dr. Patricia Brent-Sanco</h3>
@@ -233,132 +159,121 @@
             </div>
           </div>
         </div>
-        <div class="board-roster">
-          <div class="b-card reveal-up"><div class="b-img"><img src="assets/board/kimberly-hendricks-brown.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="b-init">KH</div></div><div class="b-info"><h4>Dr. Kimberly Hendricks-Brown</h4><p>Fresno USD</p></div></div>
-          <div class="b-card reveal-up"><div class="b-img"><img src="assets/board/leilah-kirkendoll.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="b-init">LK</div></div><div class="b-info"><h4>Dr. Leilah Kirkendoll</h4><p>San Diego County</p></div></div>
-          <div class="b-card reveal-up"><div class="b-img"><img src="assets/board/alicia-jackson.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="b-init">AJ</div></div><div class="b-info"><h4>Ms. Alicia Jackson</h4><p>Compton USD</p></div></div>
-          <div class="b-card reveal-up"><div class="b-img"><img src="assets/board/larhonda-ortega.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="b-init">LO</div></div><div class="b-info"><h4>Dr. LaRhonda Ortega</h4><p>Buena Park SD</p></div></div>
-          <div class="b-card reveal-up"><div class="b-img"><img src="assets/board/nicole-anderson.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="b-init">NA</div></div><div class="b-info"><h4>Nicole Anderson</h4><p>CEO, NA &amp; Associates</p></div></div>
-          <div class="b-card reveal-up"><div class="b-img"><img src="assets/board/simone-charles.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="b-init">SC</div></div><div class="b-info"><h4>Dr. Simone R. Charles</h4><p>LAUSD</p></div></div>
-          <div class="b-card reveal-up"><div class="b-img"><img src="assets/board/heather-harris.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="b-init">HH</div></div><div class="b-info"><h4>Dr. Heather Harris</h4><p>CEO, Enlighten</p></div></div>
-          <div class="b-card reveal-up"><div class="b-img"><img src="assets/board/sonjhia-lowery.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="b-init">SL</div></div><div class="b-info"><h4>Dr. Sonjhia Lowery</h4><p>CEO, Just SCORE</p></div></div>
-          <div class="b-card reveal-up"><div class="b-img"><img src="assets/board/marie-martin.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="b-init">MM</div></div><div class="b-info"><h4>Dr. Marie Martin</h4><p>Discovery Collective</p></div></div>
+        <div class="board-grid">
+          <div class="board-member fade-in"><div class="bm-photo"><img src="assets/board/kimberly-hendricks-brown.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="bm-init">KH</div></div><div class="bm-info"><h4>Dr. Kimberly Hendricks-Brown</h4><p>Fresno USD</p></div></div>
+          <div class="board-member fade-in"><div class="bm-photo"><img src="assets/board/leilah-kirkendoll.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="bm-init">LK</div></div><div class="bm-info"><h4>Dr. Leilah Kirkendoll</h4><p>San Diego County</p></div></div>
+          <div class="board-member fade-in"><div class="bm-photo"><img src="assets/board/alicia-jackson.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="bm-init">AJ</div></div><div class="bm-info"><h4>Ms. Alicia Jackson</h4><p>Compton USD</p></div></div>
+          <div class="board-member fade-in"><div class="bm-photo"><img src="assets/board/larhonda-ortega.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="bm-init">LO</div></div><div class="bm-info"><h4>Dr. LaRhonda Ortega</h4><p>Buena Park SD</p></div></div>
+          <div class="board-member fade-in"><div class="bm-photo"><img src="assets/board/nicole-anderson.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="bm-init">NA</div></div><div class="bm-info"><h4>Nicole Anderson</h4><p>CEO, NA &amp; Associates</p></div></div>
+          <div class="board-member fade-in"><div class="bm-photo"><img src="assets/board/simone-charles.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="bm-init">SC</div></div><div class="bm-info"><h4>Dr. Simone R. Charles</h4><p>LAUSD</p></div></div>
+          <div class="board-member fade-in"><div class="bm-photo"><img src="assets/board/heather-harris.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="bm-init">HH</div></div><div class="bm-info"><h4>Dr. Heather Harris</h4><p>CEO, Enlighten</p></div></div>
+          <div class="board-member fade-in"><div class="bm-photo"><img src="assets/board/sonjhia-lowery.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="bm-init">SL</div></div><div class="bm-info"><h4>Dr. Sonjhia Lowery</h4><p>CEO, Just SCORE</p></div></div>
+          <div class="board-member fade-in"><div class="bm-photo"><img src="assets/board/marie-martin.jpg" alt="" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';"><div class="bm-init">MM</div></div><div class="bm-info"><h4>Dr. Marie Martin</h4><p>Discovery Collective</p></div></div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- ===== SECTION 4: EVENTS ===== -->
-    <div class="panel" id="panel-4" data-section="4">
-      <div class="panel-inner panel-dark">
-        <div class="sec-label light reveal-up">Upcoming</div>
-        <h2 class="sec-title light reveal-up">Events</h2>
-        <div class="events-row">
-          <div class="ev-card reveal-up">
-            <div class="ev-cover">
-              <img src="assets/events/sisters-speak.jpg" alt="" onerror="this.parentElement.classList.add('no-img');">
-            </div>
-            <div class="ev-body">
-              <div class="ev-date">JAN <span>17</span></div>
-              <div class="ev-tag">Virtual</div>
+    <!-- COMMUNITY (Events) -->
+    <section class="page page-dark" id="community">
+      <div class="page-inner">
+        <div class="page-label light">Upcoming</div>
+        <h2 class="page-heading light fade-in">Community</h2>
+        <div class="events-grid">
+          <div class="event-card fade-in">
+            <div class="event-cover"><img src="assets/events/sisters-speak.jpg" alt="" onerror="this.parentElement.classList.add('no-img');"></div>
+            <div class="event-body">
+              <div class="event-date">JAN <strong>17</strong></div>
+              <div class="event-badge">Virtual</div>
               <h3>Sisters Speak Series</h3>
               <p>Dr. Enikia Ford-Morthel &amp; Dr. Cheryl Cotton</p>
-              <a href="#" class="ev-link">Reserve Seat &rarr;</a>
+              <a href="#" class="event-link">Reserve Seat &rarr;</a>
             </div>
           </div>
-          <div class="ev-card featured reveal-up">
-            <div class="ev-cover">
-              <img src="assets/events/caaasa-forum.jpg" alt="" onerror="this.parentElement.classList.add('no-img');">
-            </div>
-            <div class="ev-body">
-              <div class="ev-date">MAR <span>17</span></div>
-              <div class="ev-tag">In Person</div>
+          <div class="event-card featured fade-in">
+            <div class="event-cover"><img src="assets/events/caaasa-forum.jpg" alt="" onerror="this.parentElement.classList.add('no-img');"></div>
+            <div class="event-body">
+              <div class="event-date">MAR <strong>17</strong></div>
+              <div class="event-badge">In Person</div>
               <h3>CAAASA Women's Forum</h3>
               <p>Anaheim, CA &middot; 10AM&ndash;3PM</p>
-              <a href="https://web.cvent.com/event/1664b64a-10ca-4cdb-a1b1-fe17df41c2a5/summary" class="ev-link" target="_blank" rel="noopener">Register &rarr;</a>
+              <a href="https://web.cvent.com/event/1664b64a-10ca-4cdb-a1b1-fe17df41c2a5/summary" class="event-link" target="_blank" rel="noopener">Register &rarr;</a>
             </div>
           </div>
-          <div class="ev-card reveal-up">
-            <div class="ev-cover">
-              <img src="assets/events/womens-retreat.jpg" alt="" onerror="this.parentElement.classList.add('no-img');">
-            </div>
-            <div class="ev-body">
-              <div class="ev-date">JUN <span>26&ndash;28</span></div>
-              <div class="ev-tag hot">Limited</div>
+          <div class="event-card fade-in">
+            <div class="event-cover"><img src="assets/events/womens-retreat.jpg" alt="" onerror="this.parentElement.classList.add('no-img');"></div>
+            <div class="event-body">
+              <div class="event-date">JUN <strong>26&ndash;28</strong></div>
+              <div class="event-badge hot">Limited</div>
               <h3>Women's Retreat</h3>
               <p>The Oaks Resort &middot; San Diego</p>
-              <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5KTAzNfzUXGlBO2fEMURFQn_xLYPpzxr_KRVdQ-JJgNuPig/viewform" class="ev-link" target="_blank" rel="noopener">Waiting List &rarr;</a>
+              <a href="https://docs.google.com/forms/d/e/1FAIpQLSc5KTAzNfzUXGlBO2fEMURFQn_xLYPpzxr_KRVdQ-JJgNuPig/viewform" class="event-link" target="_blank" rel="noopener">Waiting List &rarr;</a>
             </div>
           </div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- ===== SECTION 5: GALLERY ===== -->
-    <div class="panel" id="panel-5" data-section="5">
-      <div class="panel-inner panel-white">
-        <div class="sec-label reveal-up">Memories</div>
-        <h2 class="sec-title reveal-up">A Decade <em>in Pictures</em></h2>
-        <div class="gal-grid">
-          <div class="gal-cell gal-big reveal-scale"><img src="assets/gallery/gallery-01.jpg" alt="" onerror="this.parentElement.classList.add('gal-empty');"><span>Sisters in Leadership</span></div>
-          <div class="gal-cell reveal-scale"><img src="assets/gallery/gallery-02.jpg" alt="" onerror="this.parentElement.classList.add('gal-empty');"><span>Sisters Speak</span></div>
-          <div class="gal-cell reveal-scale"><img src="assets/gallery/gallery-03.jpg" alt="" onerror="this.parentElement.classList.add('gal-empty');"><span>Networking</span></div>
-          <div class="gal-cell reveal-scale"><img src="assets/gallery/gallery-04.jpg" alt="" onerror="this.parentElement.classList.add('gal-empty');"><span>Retreat</span></div>
-          <div class="gal-cell reveal-scale"><img src="assets/gallery/gallery-05.jpg" alt="" onerror="this.parentElement.classList.add('gal-empty');"><span>Celebrating</span></div>
-          <div class="gal-cell gal-wide reveal-scale"><img src="assets/gallery/gallery-06.jpg" alt="" onerror="this.parentElement.classList.add('gal-empty');"><span>Board of Visionaries</span></div>
-          <div class="gal-cell reveal-scale"><img src="assets/gallery/gallery-07.jpg" alt="" onerror="this.parentElement.classList.add('gal-empty');"><span>Mentorship</span></div>
-          <div class="gal-cell reveal-scale"><img src="assets/gallery/gallery-08.jpg" alt="" onerror="this.parentElement.classList.add('gal-empty');"><span>Community</span></div>
+    <!-- GALLERY -->
+    <section class="page" id="gallery">
+      <div class="page-inner">
+        <div class="page-label">Memories</div>
+        <h2 class="page-heading fade-in">A Decade in Pictures</h2>
+        <div class="photo-grid">
+          <div class="photo-cell big fade-in"><img src="assets/gallery/gallery-01.jpg" alt="" onerror="this.parentElement.classList.add('empty');"><span>Sisters in Leadership</span></div>
+          <div class="photo-cell fade-in"><img src="assets/gallery/gallery-02.jpg" alt="" onerror="this.parentElement.classList.add('empty');"><span>Sisters Speak</span></div>
+          <div class="photo-cell fade-in"><img src="assets/gallery/gallery-03.jpg" alt="" onerror="this.parentElement.classList.add('empty');"><span>Networking</span></div>
+          <div class="photo-cell fade-in"><img src="assets/gallery/gallery-04.jpg" alt="" onerror="this.parentElement.classList.add('empty');"><span>Retreat</span></div>
+          <div class="photo-cell fade-in"><img src="assets/gallery/gallery-05.jpg" alt="" onerror="this.parentElement.classList.add('empty');"><span>Celebrating</span></div>
+          <div class="photo-cell wide fade-in"><img src="assets/gallery/gallery-06.jpg" alt="" onerror="this.parentElement.classList.add('empty');"><span>Board of Visionaries</span></div>
+          <div class="photo-cell fade-in"><img src="assets/gallery/gallery-07.jpg" alt="" onerror="this.parentElement.classList.add('empty');"><span>Mentorship</span></div>
+          <div class="photo-cell fade-in"><img src="assets/gallery/gallery-08.jpg" alt="" onerror="this.parentElement.classList.add('empty');"><span>Community</span></div>
         </div>
       </div>
-    </div>
+    </section>
 
-    <!-- ===== SECTION 6: CONNECT ===== -->
-    <div class="panel" id="panel-6" data-section="6">
-      <div class="panel-inner panel-dark">
-        <div class="connect-split">
+    <!-- CONNECT -->
+    <section class="page page-dark" id="connect">
+      <div class="page-inner">
+        <div class="connect-grid">
           <div class="connect-left">
-            <div class="connect-head reveal-up">
-              <span class="c-thin">Ready to</span>
-              <span class="c-big">Rise?</span>
+            <div class="connect-heading fade-in">
+              <span class="connect-thin">Ready to</span>
+              <span class="connect-big">Rise?</span>
             </div>
-            <div class="membership-callout reveal-up">
-              <span class="mem-free">Membership is Free.</span>
+            <div class="connect-free fade-in">
+              <strong>Membership is Free.</strong>
               <p>Always has been. Empowerment has no price tag.</p>
             </div>
-            <div class="social-grid reveal-up">
+            <div class="social-links fade-in">
               <a href="https://www.instagram.com/uunityofficial" target="_blank" rel="noopener">Instagram &rarr;</a>
               <a href="https://www.facebook.com/profile.php?id=100064869930165" target="_blank" rel="noopener">Facebook &rarr;</a>
               <a href="https://twitter.com/UnityWomensPro1" target="_blank" rel="noopener">Twitter/X &rarr;</a>
               <a href="https://www.youtube.com/@unityprofessionalwomensnet3625" target="_blank" rel="noopener">YouTube &rarr;</a>
             </div>
           </div>
-          <div class="connect-right reveal-up">
-            <form class="contact-form" id="contactForm">
-              <div class="f-row">
+          <div class="connect-right fade-in">
+            <form class="form" id="contactForm">
+              <div class="form-row">
                 <input type="text" placeholder="First Name" required>
                 <input type="text" placeholder="Last Name" required>
               </div>
               <input type="email" placeholder="Email" required>
               <textarea placeholder="Tell us about yourself" rows="3"></textarea>
-              <button type="submit"><span>Join Unity</span></button>
+              <button type="submit">Join Unity</button>
             </form>
           </div>
         </div>
-        <div class="partners-row">
-          <span>Partners:</span> <strong>CAAASA</strong> &middot; <strong>Curriculum Associates</strong>
-        </div>
-        <footer class="site-footer">
-          <div class="footer-row">
-            <img src="assets/hero/unity-logo.png" alt="Unity" class="footer-logo">
-            <span class="footer-era">2016 &mdash; 2026</span>
-            <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a></div>
-          </div>
-          <div class="footer-credit">&copy; 2026 UNITY &middot; Crafted with purpose</div>
+        <div class="partners fade-in">Partners: <strong>CAAASA</strong> &middot; <strong>Curriculum Associates</strong></div>
+        <footer class="footer">
+          <img src="assets/hero/unity-logo.png" alt="Unity" class="footer-logo">
+          <span class="footer-years">2016 &mdash; 2026</span>
+          <div class="footer-links"><a href="#">Privacy</a><a href="#">Terms</a></div>
         </footer>
       </div>
-    </div>
+    </section>
 
-  </div><!-- /#scroll-container -->
+  </main>
 
-  <script type="module" src="script.js"></script>
+  <script src="script.js"></script>
 </body>
 </html>
