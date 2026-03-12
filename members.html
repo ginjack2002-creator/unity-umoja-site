@@ -206,12 +206,15 @@
       gap: 16px;
     }
     .link-card {
+      display: block;
       padding: 32px 28px;
       background: var(--white);
       border: 1px solid rgba(0, 0, 0, 0.06);
       border-radius: 14px;
       transition: border-color 0.3s, transform 0.3s;
       cursor: pointer;
+      text-decoration: none;
+      color: var(--text);
     }
     .link-card:hover {
       border-color: var(--rose-light);
@@ -303,6 +306,8 @@
       border-radius: 10px;
       transition: border-color 0.3s;
       cursor: pointer;
+      text-decoration: none;
+      color: var(--text);
     }
     .resource-item:hover { border-color: var(--rose-light); }
     .resource-icon {
@@ -436,28 +441,41 @@
       <p class="welcome-sub">Your space for connection, resources, and everything Unity.</p>
     </div>
 
+    <!-- Portal Banner -->
+    <div style="max-width: 1060px; margin: 0 auto; padding: 48px clamp(24px, 6vw, 100px) 0;">
+      <a href="https://www.unityumoja.org/members-only" target="_blank" rel="noopener"
+         style="display: flex; align-items: center; justify-content: space-between; padding: 24px 32px; background: linear-gradient(135deg, rgba(183,110,121,0.06), rgba(201,168,76,0.04)); border: 1px solid rgba(183,110,121,0.12); border-radius: 14px; text-decoration: none; color: var(--text); transition: border-color 0.3s;"
+         onmouseover="this.style.borderColor='var(--rose-light)'" onmouseout="this.style.borderColor='rgba(183,110,121,0.12)'">
+        <div>
+          <div style="font-family: var(--font-display); font-size: 1.05rem; font-weight: 500; margin-bottom: 4px;">Member Portal</div>
+          <div style="font-size: 0.85rem; font-weight: 300; color: var(--text-mid);">Access recordings, exclusive content, and resources on our secure Squarespace portal.</div>
+        </div>
+        <div style="font-size: 0.85rem; font-weight: 500; color: var(--rose); white-space: nowrap; margin-left: 24px;">Open Portal &rarr;</div>
+      </a>
+    </div>
+
     <!-- Quick Links -->
     <div class="quick-links">
       <div class="section-label">Quick Access</div>
       <div class="links-grid">
-        <div class="link-card">
+        <a href="https://www.unityumoja.org/members-only" target="_blank" rel="noopener" class="link-card">
           <div class="link-card-icon">&#9825;</div>
           <h3>Sisters Speak</h3>
           <p>View upcoming sessions, past recordings, and discussion topics.</p>
-          <span class="card-arrow">View &rarr;</span>
-        </div>
-        <div class="link-card">
+          <span class="card-arrow">View on Portal &rarr;</span>
+        </a>
+        <a href="https://www.unityumoja.org/members-only" target="_blank" rel="noopener" class="link-card">
           <div class="link-card-icon">&#9734;</div>
           <h3>Mentorship Program</h3>
           <p>Connect with mentors, track goals, and access development resources.</p>
-          <span class="card-arrow">View &rarr;</span>
-        </div>
-        <div class="link-card">
+          <span class="card-arrow">View on Portal &rarr;</span>
+        </a>
+        <a href="https://www.unityumoja.org/events" target="_blank" rel="noopener" class="link-card">
           <div class="link-card-icon">&#9992;</div>
           <h3>Women's Retreat</h3>
           <p>San Diego, Jun 26-28. Retreat details, agenda, and travel info.</p>
-          <span class="card-arrow">View &rarr;</span>
-        </div>
+          <span class="card-arrow">View Details &rarr;</span>
+        </a>
       </div>
     </div>
 
@@ -493,48 +511,48 @@
     <div class="resources">
       <div class="section-label">Member Resources</div>
       <div class="resource-list">
-        <div class="resource-item">
+        <a href="https://www.unityumoja.org/members-only" target="_blank" rel="noopener" class="resource-item">
           <div class="resource-icon">&#128196;</div>
           <div class="resource-info">
             <h4>Leadership Toolkit</h4>
             <p>Templates, guides, and frameworks for aspiring administrators</p>
           </div>
-        </div>
-        <div class="resource-item">
+        </a>
+        <a href="https://www.unityumoja.org/members-only" target="_blank" rel="noopener" class="resource-item">
           <div class="resource-icon">&#127891;</div>
           <div class="resource-info">
-            <h4>Professional Development</h4>
-            <p>Workshop recordings and presentation decks</p>
+            <h4>Past Recordings</h4>
+            <p>Workshop recordings, Sisters Speak replays, and presentation decks</p>
           </div>
-        </div>
-        <div class="resource-item">
+        </a>
+        <a href="https://www.unityumoja.org/members-only" target="_blank" rel="noopener" class="resource-item">
           <div class="resource-icon">&#128221;</div>
           <div class="resource-info">
             <h4>Meeting Minutes</h4>
             <p>Board meeting notes and action items archive</p>
           </div>
-        </div>
-        <div class="resource-item">
+        </a>
+        <a href="https://www.unityumoja.org/members-only" target="_blank" rel="noopener" class="resource-item">
           <div class="resource-icon">&#128247;</div>
           <div class="resource-info">
             <h4>Photo Archives</h4>
             <p>Event photos and memories from 10 years of Unity</p>
           </div>
-        </div>
-        <div class="resource-item">
+        </a>
+        <a href="https://www.unityumoja.org/members-only" target="_blank" rel="noopener" class="resource-item">
           <div class="resource-icon">&#128218;</div>
           <div class="resource-info">
             <h4>Book Club</h4>
             <p>Current reading list and discussion schedule</p>
           </div>
-        </div>
-        <div class="resource-item">
+        </a>
+        <a href="https://www.unityumoja.org/members-only" target="_blank" rel="noopener" class="resource-item">
           <div class="resource-icon">&#128279;</div>
           <div class="resource-info">
             <h4>Partner Resources</h4>
             <p>Exclusive content from CAAASA and Curriculum Associates</p>
           </div>
-        </div>
+        </a>
       </div>
     </div>
 
