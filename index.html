@@ -7,7 +7,7 @@
   <meta name="description" content="Unity Professional Women's Network — A Decade of Leading. A Legacy of Lifting. 10 years of empowering African American women educators.">
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400;1,500&family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,600;0,700;1,400;1,500&family=Outfit:wght@200;300;400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="styles.css">
 
   <script type="importmap">
@@ -19,18 +19,15 @@
   }
   </script>
 
-  <!-- GSAP + ScrollTrigger + ScrollSmoother + ScrollToPlugin -->
+  <!-- GSAP + ScrollTrigger + ScrollToPlugin -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollToPlugin.min.js"></script>
 </head>
 <body>
 
-  <!-- THREE.JS 3D Canvas — fixed fullscreen backdrop -->
+  <!-- THREE.JS Canvas — subtle background -->
   <canvas id="three-canvas"></canvas>
-
-  <!-- Hidden goddess source for Three.js texture -->
-  <img id="goddess-src" src="assets/hero/goddess.gif" alt="" crossorigin="anonymous" style="display:none;">
 
   <!-- Preloader -->
   <div class="preloader" id="preloader">
@@ -85,10 +82,10 @@
     <a href="#" data-goto="6">Connect</a>
   </div>
 
-  <!-- ===== SCROLL CONTAINER (700vh) ===== -->
+  <!-- ===== SCROLL CONTAINER ===== -->
   <div id="scroll-container">
 
-    <!-- ===== SECTION 0: HERO / OPENING ===== -->
+    <!-- ===== SECTION 0: HERO ===== -->
     <div class="panel" id="panel-0" data-section="0">
       <div class="panel-inner panel-hero">
         <div class="hero-logo-wrap">
@@ -107,10 +104,10 @@
       </div>
     </div>
 
-    <!-- ===== SECTION 1: ABOUT / MISSION ===== -->
+    <!-- ===== SECTION 1: ABOUT ===== -->
     <div class="panel" id="panel-1" data-section="1">
-      <div class="panel-inner panel-glass-light">
-        <div class="sec-num">01</div>
+      <div class="panel-inner panel-light">
+        <div class="sec-label reveal-up">Our Mission</div>
         <div class="about-grid">
           <div class="about-col-left">
             <h2 class="about-mission reveal-up">
@@ -145,10 +142,10 @@
       </div>
     </div>
 
-    <!-- ===== SECTION 2: JOURNEY (TIMELINE) ===== -->
+    <!-- ===== SECTION 2: JOURNEY ===== -->
     <div class="panel" id="panel-2" data-section="2">
-      <div class="panel-inner panel-glass-cream">
-        <div class="sec-num">02</div>
+      <div class="panel-inner panel-white">
+        <div class="sec-label reveal-up">Our Story</div>
         <h2 class="sec-title reveal-up">The <em>Journey</em></h2>
         <div class="journey-timeline" id="journeyTimeline">
           <div class="tl-track">
@@ -209,8 +206,8 @@
 
     <!-- ===== SECTION 3: LEADERSHIP ===== -->
     <div class="panel" id="panel-3" data-section="3">
-      <div class="panel-inner panel-glass-light">
-        <div class="sec-num">03</div>
+      <div class="panel-inner panel-light">
+        <div class="sec-label reveal-up">Leadership</div>
         <div class="quote-block reveal-up">
           <span class="q-mark">&ldquo;</span>Someone who's already walked the path, <span class="hl-rose">guide you along</span> to yours.
         </div>
@@ -252,9 +249,9 @@
 
     <!-- ===== SECTION 4: EVENTS ===== -->
     <div class="panel" id="panel-4" data-section="4">
-      <div class="panel-inner panel-glass-dark">
-        <div class="sec-num light">04</div>
-        <h2 class="sec-title light reveal-up">Upcoming <em>Events</em></h2>
+      <div class="panel-inner panel-dark">
+        <div class="sec-label light reveal-up">Upcoming</div>
+        <h2 class="sec-title light reveal-up">Events</h2>
         <div class="events-row">
           <div class="ev-card reveal-up">
             <div class="ev-cover">
@@ -298,8 +295,8 @@
 
     <!-- ===== SECTION 5: GALLERY ===== -->
     <div class="panel" id="panel-5" data-section="5">
-      <div class="panel-inner panel-glass-light">
-        <div class="sec-num">05</div>
+      <div class="panel-inner panel-white">
+        <div class="sec-label reveal-up">Memories</div>
         <h2 class="sec-title reveal-up">A Decade <em>in Pictures</em></h2>
         <div class="gal-grid">
           <div class="gal-cell gal-big reveal-scale"><img src="assets/gallery/gallery-01.jpg" alt="" onerror="this.parentElement.classList.add('gal-empty');"><span>Sisters in Leadership</span></div>
@@ -316,7 +313,7 @@
 
     <!-- ===== SECTION 6: CONNECT ===== -->
     <div class="panel" id="panel-6" data-section="6">
-      <div class="panel-inner panel-glass-dark">
+      <div class="panel-inner panel-dark">
         <div class="connect-split">
           <div class="connect-left">
             <div class="connect-head reveal-up">
@@ -342,7 +339,7 @@
               </div>
               <input type="email" placeholder="Email" required>
               <textarea placeholder="Tell us about yourself" rows="3"></textarea>
-              <button type="submit"><span>Join Unity</span><div class="btn-shine"></div></button>
+              <button type="submit"><span>Join Unity</span></button>
             </form>
           </div>
         </div>
