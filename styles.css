@@ -238,6 +238,10 @@ button { border: none; background: none; cursor: pointer; font: inherit; }
   padding: 8px 0;
 }
 .top-nav-links a:hover { color: var(--text); }
+.top-nav-members {
+  color: var(--rose) !important;
+  font-weight: 500 !important;
+}
 
 .top-nav-burger {
   display: none;
